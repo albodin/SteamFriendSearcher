@@ -24,7 +24,7 @@ namespace SteamFriendSearchApp
     /// <seealso cref="System.Windows.Forms.Form" />
     public partial class FriendSearchForm : Form
     {
-        private readonly AddRecentGameForm addRecentGameForm;
+        private AddRecentGameForm addRecentGameForm;
         private readonly Semaphore semaphore = new Semaphore(1, 1);
         private readonly Dictionary<string, List<User>> usersDic = new Dictionary<string, List<User>>();
         private readonly List<string> foundUserUrls = new List<string>();
@@ -329,6 +329,10 @@ namespace SteamFriendSearchApp
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void addToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (addRecentGameForm.IsDisposed)
+            {
+                addRecentGameForm = new AddRecentGameForm(this);
+            }
             addRecentGameForm.Show();
         }
 
